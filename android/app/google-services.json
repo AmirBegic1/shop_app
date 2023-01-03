@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "14264552245",
+    "project_id": "shop-app-f27dd",
+    "storage_bucket": "shop-app-f27dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14264552245:android:c44f2e161387371c8d5a7c",
+        "android_client_info": {
+          "package_name": "com.amirbegic.buy_and_sell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14264552245-uv7vb8rc410iirv0ol4an6pv7l5iau2s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amirbegic.buy_and_sell",
+            "certificate_hash": "abe9e65face2ecd662f244c85cc402c8e8b697ab"
+          }
+        },
+        {
+          "client_id": "14264552245-3mmveekhj2s36eb23d9tqld3p11d2h4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCSwjQ8oBDnMeyfCi0NLO0U6CT22vRLR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14264552245-3mmveekhj2s36eb23d9tqld3p11d2h4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
