@@ -7,20 +7,25 @@ class WellcomeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Hello, What Are You\n Looking For',
-          style: TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top, left: 25, right: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Hello, What Are You\n Looking For',
+            style: TextStyle(
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Container(
-          child: IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
-        )
-      ],
+          Container(
+            child:
+                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          )
+        ],
+      ),
     );
   }
 }

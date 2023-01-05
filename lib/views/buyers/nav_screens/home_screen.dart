@@ -1,3 +1,4 @@
+import 'package:buy_and_sell/views/buyers/nav_screens/widgets/banner_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/search_input_widget.dart';
@@ -9,16 +10,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top, left: 25, right: 15),
-        child: Column(
-          children: [
-            WellcomeText(),
-            SizedBox(height: 20),
-            SearchInputWidget(),
-          ],
-        ),
+      child: Column(
+        children: [
+          WellcomeText(),
+          SizedBox(height: 20),
+          SearchInputWidget(),
+          BannerWidget(),
+        ],
       ),
     );
   }
