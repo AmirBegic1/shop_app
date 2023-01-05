@@ -46,7 +46,13 @@ class _BannerWidgetState extends State<BannerWidget> {
         child: PageView.builder(
           itemCount: _bannersImage.length,
           itemBuilder: (context, index) {
-            return Image.network(_bannersImage[index]);
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                _bannersImage[index],
+                fit: BoxFit.cover,
+              ),
+            );
           },
         ),
       ),
