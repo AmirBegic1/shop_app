@@ -35,4 +35,23 @@ class AuthController {
 
     return res;
   }
+
+  loginUsers(String email, String password) async {
+    String res = 'Nesto ne valja';
+
+    try {
+      if (email.isEmpty && password.isEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        res = 'success';
+      } else {
+        res = 'Please Fields must not be empty';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+
+    return res;
+  }
 }

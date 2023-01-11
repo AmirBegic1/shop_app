@@ -23,13 +23,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final AuthController _auth = AuthController();
 
-  _signUpUsers() async {
-    if (_formKey.currentState!.validate()) {
-      await _auth.signUp(email, fullName, phoneNumber, password, address);
+  bool _isLoading = false;
 
-      showSnack(context, 'Success! Account has been created!');
+  _signUpUsers() async {
+    setState(() {
+      _isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signUp(email, fullName, phoneNumber, address, password)
+          .whenComplete(() {
+        setState(() {
+          _formKey.currentState!.reset();
+          _isLoading = false;
+        });
+      });
+
+      return showSnack(context, 'Success! Account has been created!');
     } else {
-      showSnack(context, 'Error while creating account');
+      setState(() {
+        _isLoading = false;
+      });
+      return showSnack(context, 'Error while creating account');
     }
   }
 
@@ -67,6 +82,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       email = value;
                     },
                     decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.yellow.shade900,
+                      ),
                       labelText: 'Enter Email',
                     ),
                   ),
@@ -85,6 +104,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fullName = value;
                     },
                     decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.yellow.shade900,
+                      ),
                       labelText: 'Enter Full Name',
                     ),
                   ),
@@ -103,25 +126,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       phoneNumber = value;
                     },
                     decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        color: Colors.yellow.shade900,
+                      ),
                       labelText: 'Enter Phone Number',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Password must not be empty';
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (value) {
-                      password = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Enter Address',
                     ),
                   ),
                 ),
@@ -139,7 +148,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       password = value;
                     },
                     decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.location_city,
+                        color: Colors.yellow.shade900,
+                      ),
                       labelText: 'Enter Address',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: TextFormField(
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Password must not be empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.password_rounded,
+                        color: Colors.yellow.shade900,
+                      ),
+                      labelText: 'Enter Password',
                     ),
                   ),
                 ),
@@ -155,15 +191,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Text(
-                        'Register Now!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 3,
-                        ),
-                      ),
+                      child: _isLoading
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              'Register Now!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 3,
+                              ),
+                            ),
                     ),
                   ),
                 ),
