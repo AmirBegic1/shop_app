@@ -1,21 +1,35 @@
 import 'package:buy_and_sell/controllers/auth_controller.dart';
+import 'package:buy_and_sell/utils/show_snackbar.dart';
 import 'package:buy_and_sell/views/buyers/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   late String email;
+
   late String fullName;
+
   late String phoneNumber;
+
   late String password;
+
+  late String address;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final AuthController _auth = AuthController();
 
   _signUpUsers() async {
     if (_formKey.currentState!.validate()) {
-      await _auth.signUp(email, fullName, phoneNumber, password);
+      await _auth.signUp(email, fullName, phoneNumber, password, address);
+
+      showSnack(context, 'Success! Account has been created!');
     } else {
-      print('Ne valja nesto');
+      showSnack(context, 'Error while creating account');
     }
   }
 
@@ -107,7 +121,25 @@ class RegisterScreen extends StatelessWidget {
                       password = value;
                     },
                     decoration: InputDecoration(
-                      labelText: 'Enter Password',
+                      labelText: 'Enter Address',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Adress must not be empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Enter Address',
                     ),
                   ),
                 ),
